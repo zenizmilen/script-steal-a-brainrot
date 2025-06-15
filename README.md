@@ -1,0 +1,1 @@
+# script-steal-a-brainrot
