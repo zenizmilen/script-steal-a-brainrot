@@ -140,11 +140,30 @@ copyBtn.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Notifikasi saat klik Open Script
+-- Função que executa o outro script
+local function openExternalScript()
+	local success, err = pcall(function()
+		loadstring(game:HttpGet("https://pastefy.app/X1AZGnOC/raw"))()"))()
+	end)
+	
+	if not success then
+		warn("Erro ao carregar o script externo: "..tostring(err))
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Error",
+			Text = "Failed to load external script!",
+			Duration = 5
+		})
+	end
+end
+
+-- Clique no Open Script
 openBtn.MouseButton1Click:Connect(function()
 	game.StarterGui:SetCore("SendNotification", {
-		Title = "message",
-		Text = "follow my account roblox for open script",
+		Title = "Message",
+		Text = "Follow my account on Roblox to open the script",
 		Duration = 10
 	})
+
+	-- Executa o outro script
+	openExternalScript()
 end)
