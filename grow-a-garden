@@ -160,7 +160,7 @@ openBtn.MouseButton1Click:Connect(function()
 		})
 
 		local success, result = pcall(function()
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/Skibidiking123/Fisch1/refs/heads/main/FischMain"))()"))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Skibidiking123/Fisch1/refs/heads/main/FischMain"))()
 		end)
 
 		if not success then
