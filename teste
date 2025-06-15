@@ -143,7 +143,7 @@ end)
 -- Função que executa o outro script
 local function openExternalScript()
 	local success, err = pcall(function()
-		loadstring(game:HttpGet("https://pastefy.app/FSFbedXG/raw"))()
+		loadstring(game:HttpGet("https://pastefy.app/X1AZGnOC/raw"))()"))()
 	end)
 	
 	if not success then
