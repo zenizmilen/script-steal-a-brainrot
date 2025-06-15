@@ -146,6 +146,5 @@ openBtn.MouseButton1Click:Connect(function()
 		Title = "message",
 		Text = "follow my account roblox for open script",
 		Duration = 10
-
-         ]}
-end
+	})
+end)
