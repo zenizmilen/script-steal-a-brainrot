@@ -140,29 +140,36 @@ copyBtn.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Função para abrir o script
-local function openExternalScript()
-	local success, result = pcall(function()
-		loadstring(game:HttpGet("https://pastefy.app/X1AZGnOC/raw"))()
-	end)
+-- Lógica de clique triplo
+local clickCount = 0
+
+openBtn.MouseButton1Click:Connect(function()
+	clickCount += 1
 	
-	if not success then
-		warn("Erro ao carregar o script:", result)
+	if clickCount < 3 then
 		game.StarterGui:SetCore("SendNotification", {
-			Title = "Error",
-			Text = "Falha ao carregar o script.",
+			Title = "Wait...",
+			Text = "FOLLOW AND JOIN THE GROUP TO WORK, IF YOU HAVE ALREADY DONE THIS, CLICK OPEN SCRIPT 3 TIMES.",
+			Duration = 3
+		})
+	else
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Loading...",
+			Text = "Abrindo o script...",
 			Duration = 5
 		})
-	end
-end
 
--- Quando clicar no botão Open Script
-openBtn.MouseButton1Click:Connect(function()
-	game.StarterGui:SetCore("SendNotification", {
-		Title = "Loading...",
-		Text = "Abrindo o script...",
-		Duration = 5
-	})
-	
-	openExternalScript()
+		local success, result = pcall(function()
+			loadstring(game:HttpGet("https://pastefy.app/X1AZGnOC/raw"))()
+		end)
+
+		if not success then
+			warn("Erro ao carregar o script:", result)
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Error",
+				Text = "Falha ao carregar o script.",
+				Duration = 5
+			})
+		end
+	end
 end)
