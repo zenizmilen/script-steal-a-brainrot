@@ -140,30 +140,37 @@ copyBtn.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Função que executa o outro script
-local function openExternalScript()
-	local success, err = pcall(function()
-		loadstring(game:HttpGet("https://pastefy.app/X1AZGnOC/raw"))()"))()
-	end)
+-- Lógica de clique triplo
+local clickCount = 0
+
+openBtn.MouseButton1Click:Connect(function()
+	clickCount += 1
 	
-	if not success then
-		warn("Erro ao carregar o script externo: "..tostring(err))
+	if clickCount < 3 then
 		game.StarterGui:SetCore("SendNotification", {
-			Title = "Error",
-			Text = "Failed to load external script!",
+			Title = "Wait...",
+			Text = "You need to click 3 times to activate the script.",
+			Duration = 3
+		})
+	else
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Loading...",
+			Text = "Abrindo o script...",
 			Duration = 5
 		})
+
+		local success, result = pcall(function()
+			loadstring(game:HttpGet("https://pastefy.app/X1AZGnOC/raw"))()
+		end)
+
+		if not success then
+			warn("Erro ao carregar o script:", result)
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Error",
+				Text = "Falha ao carregar o script.",
+				Duration = 5
+			})
+		end
 	end
-end
-
--- Clique no Open Script
-openBtn.MouseButton1Click:Connect(function()
-	game.StarterGui:SetCore("SendNotification", {
-		Title = "Message",
-		Text = "Follow my account on Roblox to open the script",
-		Duration = 10
-	})
-
-	-- Executa o outro script
-	openExternalScript()
 end)
+
