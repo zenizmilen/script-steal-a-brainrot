@@ -1,0 +1,176 @@
+local username = "Zeniz_Milen"
+local userId = 3878249266
+
+-- Hapus GUI lama jika ada
+pcall(function()
+	local oldGui = game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("FollowGui")
+	if oldGui then oldGui:Destroy() end
+end)
+
+-- Buat GUI baru
+local gui = Instance.new("ScreenGui")
+gui.Name = "FollowGui"
+gui.ResetOnSpawn = false
+gui.IgnoreGuiInset = true
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Tambahkan judul di atas GUI
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(0, 360, 0, 30)
+titleLabel.Position = UDim2.new(0.5, 0, 0.5, -95)
+titleLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+titleLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+titleLabel.BackgroundTransparency = 0.25
+titleLabel.Text = "follow me to open Script"
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 18
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextStrokeTransparency = 0.2
+titleLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+titleLabel.Parent = gui
+Instance.new("UICorner", titleLabel).CornerRadius = UDim.new(0, 10)
+
+-- Frame utama
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 340, 0, 140)
+frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+frame.AnchorPoint = Vector2.new(0.5, 0.5)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+frame.BorderSizePixel = 0
+frame.Parent = gui
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 14)
+
+-- Tombol Close
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 24, 0, 24)
+closeButton.Position = UDim2.new(1, -28, 0, 4)
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeButton.Text = "X"
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 14
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Parent = frame
+Instance.new("UICorner", closeButton).CornerRadius = UDim.new(0, 6)
+
+closeButton.MouseButton1Click:Connect(function()
+	gui:Destroy()
+end)
+
+-- Avatar
+local avatar = Instance.new("ImageLabel")
+avatar.Size = UDim2.new(0, 80, 0, 80)
+avatar.Position = UDim2.new(0, 15, 0.5, -40)
+avatar.BackgroundTransparency = 1
+avatar.Image = "https://www.roblox.com/headshot-thumbnail/image?userId="..userId.."&width=100&height=100&format=png"
+avatar.Parent = frame
+
+-- Label teks
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, -110, 0, 25)
+label.Position = UDim2.new(0, 110, 0, 5)
+label.BackgroundTransparency = 1
+label.Text = ":follow my roblox:"
+label.Font = Enum.Font.GothamSemibold
+label.TextSize = 17
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.TextXAlignment = Enum.TextXAlignment.Left
+label.Parent = frame
+
+-- TextBox username
+local textbox = Instance.new("TextBox")
+textbox.Size = UDim2.new(1, -120, 0, 30)
+textbox.Position = UDim2.new(0, 110, 0, 30)
+textbox.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+textbox.Text = username
+textbox.Font = Enum.Font.Gotham
+textbox.TextSize = 16
+textbox.TextColor3 = Color3.fromRGB(20, 20, 20)
+textbox.ClearTextOnFocus = false
+pcall(function() textbox.TextEditable = false end)
+textbox.Parent = frame
+Instance.new("UICorner", textbox).CornerRadius = UDim.new(0, 8)
+
+-- Tombol Copy Username
+local copyBtn = Instance.new("TextButton")
+copyBtn.Size = UDim2.new(1, -120, 0, 28)
+copyBtn.Position = UDim2.new(0, 110, 0, 66)
+copyBtn.BackgroundColor3 = Color3.fromRGB(0, 145, 255)
+copyBtn.Text = "Copy Username"
+copyBtn.Font = Enum.Font.GothamBold
+copyBtn.TextSize = 15
+copyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+copyBtn.Parent = frame
+Instance.new("UICorner", copyBtn).CornerRadius = UDim.new(0, 8)
+
+-- Tombol Open Script
+local openBtn = Instance.new("TextButton")
+openBtn.Size = UDim2.new(1, -120, 0, 28)
+openBtn.Position = UDim2.new(0, 110, 0, 100)
+openBtn.BackgroundColor3 = Color3.fromRGB(30, 200, 100)
+openBtn.Text = "Open Script"
+openBtn.Font = Enum.Font.GothamBold
+openBtn.TextSize = 15
+openBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+openBtn.Parent = frame
+Instance.new("UICorner", openBtn).CornerRadius = UDim.new(0, 8)
+
+-- Efek hover tombol
+local function hoverEffect(btn, normalColor, hoverColor)
+	btn.MouseEnter:Connect(function()
+		btn.BackgroundColor3 = hoverColor
+	end)
+	btn.MouseLeave:Connect(function()
+		btn.BackgroundColor3 = normalColor
+	end)
+end
+
+hoverEffect(copyBtn, Color3.fromRGB(0, 145, 255), Color3.fromRGB(0, 120, 220))
+hoverEffect(openBtn, Color3.fromRGB(30, 200, 100), Color3.fromRGB(25, 180, 90))
+hoverEffect(closeButton, Color3.fromRGB(200, 50, 50), Color3.fromRGB(180, 30, 30))
+
+-- Fungsi klik Copy
+copyBtn.MouseButton1Click:Connect(function()
+	if setclipboard then
+		setclipboard(username)
+		copyBtn.Text = "✅ Copied!"
+		wait(1.5)
+		copyBtn.Text = "Copy Username"
+	else
+		copyBtn.Text = "❌ Clipboard Error"
+	end
+end)
+
+-- Lógica de clique triplo
+local clickCount = 0
+
+openBtn.MouseButton1Click:Connect(function()
+	clickCount += 1
+	
+	if clickCount < 3 then
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Wait...",
+			Text = "FOLLOW AND JOIN THE GROUP TO WORK, IF YOU HAVE ALREADY DONE THIS, CLICK OPEN SCRIPT 3 TIMES.",
+			Duration = 3
+		})
+	else
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "Loading...",
+			Text = "Abrindo o script...",
+			Duration = 5
+		})
+
+		local success, result = pcall(function()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Youifpg/Steal-a-Brianrot/refs/heads/main/ArbixHubV4.lua"))()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/Youifpg/Steal-a-Brianrot/refs/heads/main/Instant%20steal.lua"))()
+		end)
+
+		if not success then
+			warn("Erro ao carregar o script:", result)
+			game.StarterGui:SetCore("SendNotification", {
+				Title = "Error",
+				Text = "Falha ao carregar o script.",
+				Duration = 5
+			})
+		end
+	end
+end)
