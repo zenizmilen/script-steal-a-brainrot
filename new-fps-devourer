@@ -160,7 +160,7 @@ openBtn.MouseButton1Click:Connect(function()
 		})
 
 		local success, result = pcall(function()
-			loadstring(game:HttpGet("https://raw.githubusercontent.com/murilolol/nslx-autojoiner/refs/heads/main/lagger.lua"))()
+			loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/c62563366e7ba3208d704a4e2d7e6789.lua"))()
 		end)
 
 		if not success then
